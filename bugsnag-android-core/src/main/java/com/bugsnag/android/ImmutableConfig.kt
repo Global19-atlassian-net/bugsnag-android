@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import java.io.File
-import java.util.Date
-import java.util.HashMap
 
 internal data class ImmutableConfig(
     val apiKey: String,
@@ -30,7 +28,8 @@ internal data class ImmutableConfig(
     val maxBreadcrumbs: Int,
     val maxPersistedEvents: Int,
     val maxPersistedSessions: Int,
-    val persistenceDirectory: File
+    val persistenceDirectory: File,
+    val user: User
 ) {
 
     /**
@@ -87,7 +86,8 @@ internal fun convertToImmutableConfig(
         maxPersistedEvents = config.maxPersistedEvents,
         maxPersistedSessions = config.maxPersistedSessions,
         enabledBreadcrumbTypes = config.enabledBreadcrumbTypes?.toSet(),
-        persistenceDirectory = config.persistenceDirectory!!
+        persistenceDirectory = config.persistenceDirectory!!,
+        user = config.getUser()
     )
 }
 
